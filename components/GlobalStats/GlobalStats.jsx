@@ -40,8 +40,8 @@ export default function GlobalStats() {
         <div className="w-1/3 p-4">
           <GlobalStat
             label="Recovered"
-            totalCases={processedData.TotalRecovered}
-            newCases={processedData.NewRecovered}
+            totalCases={data.Global.TotalRecovered}
+            newCases={data.Global.NewRecovered}
             color="text-green-500"
           />
         </div>
@@ -49,8 +49,8 @@ export default function GlobalStats() {
         <div className="w-1/3 p-4">
           <GlobalStat
             label="Deaths"
-            totalCases={processedData.TotalDeaths}
-            newCases={processedData.NewDeaths}
+            totalCases={data.Global.TotalDeaths}
+            newCases={data.Global.NewDeaths}
             color="text-red-500"
           />
         </div>
