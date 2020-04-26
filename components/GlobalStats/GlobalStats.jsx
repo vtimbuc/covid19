@@ -22,9 +22,17 @@ export default function GlobalStats() {
       <section className="flex -m-4 mb-4">
         <div className="w-1/3 p-4">
           <GlobalStat
-            label="Confirmed"
-            totalCases={data.Global.TotalConfirmed}
-            newCases={data.Global.NewConfirmed}
+            label="Active"
+            totalCases={
+              data.Global.TotalConfirmed -
+              data.Global.TotalRecovered -
+              data.Global.TotalDeaths
+            }
+            newCases={
+              data.Global.NewConfirmed -
+              data.Global.NewRecovered -
+              data.Global.NewDeaths
+            }
             color="text-orange-500"
           />
         </div>
@@ -32,8 +40,8 @@ export default function GlobalStats() {
         <div className="w-1/3 p-4">
           <GlobalStat
             label="Recovered"
-            totalCases={data.Global.TotalRecovered}
-            newCases={data.Global.NewRecovered}
+            totalCases={processedData.TotalRecovered}
+            newCases={processedData.NewRecovered}
             color="text-green-500"
           />
         </div>
@@ -41,8 +49,8 @@ export default function GlobalStats() {
         <div className="w-1/3 p-4">
           <GlobalStat
             label="Deaths"
-            totalCases={data.Global.TotalDeaths}
-            newCases={data.Global.NewDeaths}
+            totalCases={processedData.TotalDeaths}
+            newCases={processedData.NewDeaths}
             color="text-red-500"
           />
         </div>

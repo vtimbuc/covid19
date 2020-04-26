@@ -37,16 +37,23 @@ export default function CountryStatsTable() {
     const date = new Date(data.Date)
 
     const processedData = Array.from(data.Countries).map(country => {
-      const Total =
-        country.TotalConfirmed + country.TotalRecovered + country.TotalDeaths
+      const TotalActive =
+        country.TotalConfirmed - country.TotalRecovered - country.TotalDeaths
+
+      const NewActive =
+        country.NewConfirmed - country.NewRecovered - country.NewDeaths
 
       return {
-        Total,
+        TotalActive,
+        NewActive,
         ...country
       }
     })
 
-    const sortedData = stableSort(processedData, getComparator('desc', 'Total'))
+    const sortedData = stableSort(
+      processedData,
+      getComparator('desc', 'TotalConfirmed')
+    )
 
     return (
       <>
@@ -59,7 +66,7 @@ export default function CountryStatsTable() {
                 </TableCell>
 
                 <TableCell tw="text-gray-700 font-bold text-right text-xl uppercase tracking-wider">
-                  Confirmed
+                  Active
                 </TableCell>
 
                 <TableCell tw="text-gray-700 font-bold text-right text-xl uppercase tracking-wider">
@@ -82,11 +89,11 @@ export default function CountryStatsTable() {
 
                     <TableCell tw="text-right text-orange-500">
                       <div className="flex justify-end items-center">
-                        {country.TotalConfirmed.toLocaleString()}
+                        {country.TotalActive.toLocaleString()}
 
-                        {country.NewConfirmed && country.NewConfirmed > 0 ? (
+                        {country.NewActive && country.NewActive > 0 ? (
                           <strong className="ml-3 text-orange-700">
-                            +{country.NewConfirmed.toLocaleString()}
+                            +{country.NewActive.toLocaleString()}
                           </strong>
                         ) : (
                           ''
